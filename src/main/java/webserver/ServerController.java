@@ -114,6 +114,7 @@ public class ServerController {
         }catch(NullPointerException e){
             System.err.println("Null client object was given");
         }catch(IOException e){
+            e.printStackTrace();
             System.err.println("Problem with Communication Server");
         }
 
