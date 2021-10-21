@@ -1,9 +1,10 @@
+import exceptions.WrongServerException;
 import webserver.ServerController;
 import webserver.WebServer;
 
 public class ServerMain {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws WrongServerException {
 
         int port = 8080; // port
         String websiteFilesPath = "src/main/java/website"; // the path to website files
