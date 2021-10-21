@@ -3,15 +3,13 @@ package webserver;
 public class WebServer {
 
     private int port; // port
-    private String indexPath; // the path to index.html
-    private String maintenancePath; // the path to maintanance.html
+    private String websiteFilesPath; // the path to website files
     private String serverStatus; // the server's status
     private String request; // handled request
 
-    public WebServer(int port, String indexPath, String maintenancePath, String serverStatus) {
+    public WebServer(int port, String websiteFilesPath, String serverStatus) {
         this.port = port;
-        this.indexPath = indexPath;
-        this.maintenancePath = maintenancePath;
+        this.websiteFilesPath = websiteFilesPath;
         this.serverStatus = serverStatus;
         this.request = "";
     }
@@ -24,28 +22,12 @@ public class WebServer {
         this.port = port;
     }
 
-    public String getMaintenancePath() {
-        return maintenancePath;
-    }
-
-    public void setMaintenancePath(String maintenancePath) {
-        this.maintenancePath = maintenancePath;
-    }
-
     public String getServerStatus() {
         return serverStatus;
     }
 
     public void setServerStatus(String serverStatus) {
         this.serverStatus = serverStatus;
-    }
-
-    public String getIndexPath() {
-        return indexPath;
-    }
-
-    public void setIndexPath(String indexPath) {
-        this.indexPath = indexPath;
     }
 
     public String getRequest() {
@@ -55,4 +37,8 @@ public class WebServer {
     public void setRequest(String request) {
         this.request = request;
     }
+
+    public String getWebsiteFilesPath() { return websiteFilesPath; }
+
+    public void setWebsiteFilesPath(String websiteFilesPath) { this.websiteFilesPath = websiteFilesPath; }
 }
