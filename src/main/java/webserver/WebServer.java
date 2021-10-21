@@ -1,5 +1,7 @@
 package webserver;
 
+import exceptions.WrongServerException;
+
 public class WebServer {
 
     private int port; // port
@@ -7,7 +9,7 @@ public class WebServer {
     private String serverStatus; // the server's status
     private String request; // handled request
 
-    public WebServer(int port, String websiteFilesPath, String serverStatus) {
+    public WebServer(int port, String websiteFilesPath, String serverStatus) throws WrongServerException {
         this.port = port;
         this.websiteFilesPath = websiteFilesPath;
         this.serverStatus = serverStatus;
