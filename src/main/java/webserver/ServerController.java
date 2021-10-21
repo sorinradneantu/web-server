@@ -69,11 +69,11 @@ public class ServerController {
 
                 // Construct the path for file
                 if("/".equals(rawPath)){
-                    filePath = Paths.get(webServer.getIndexPath(), "index.html");
+                    filePath = Paths.get(webServer.getWebsiteFilesPath(), "index/index.html");
                 }else if("/index.css".equals(rawPath)){
-                    filePath = Paths.get(webServer.getIndexPath(),"index.css");
+                    filePath = Paths.get(webServer.getWebsiteFilesPath(),"index/index.css");
                 }else if("favicon.ico".equals(rawPath)){
-                    filePath = Paths.get(webServer.getIndexPath(), "favicon.ico");
+                    filePath = Paths.get(webServer.getWebsiteFilesPath(), "index/favicon.ico");
                 }else{
                     filePath = Paths.get(rawPath);
                 }
@@ -90,17 +90,17 @@ public class ServerController {
                     if(Files.exists(filePath)){
                         sendResponse(out,"200 OK",contentType,Files.readAllBytes(filePath));
                     }else{
-                        sendResponse(out, "404 Not Found", contentType, Files.readAllBytes(Paths.get(webServer.getIndexPath(), "/notfound.html")));
+                        sendResponse(out, "404 Not Found", contentType, Files.readAllBytes(Paths.get(webServer.getWebsiteFilesPath(), "notfound/notfound.html")));
                     }
                 }else if (webServer.getServerStatus().equals("Maintenance")) {
                     if (contentType.contains("html")) {
-                        sendResponse(out, "503 Service Unavailable", contentType, Files.readAllBytes(Paths.get(webServer.getMaintenancePath(), "/maintenance.html")));
+                        sendResponse(out, "503 Service Unavailable", contentType, Files.readAllBytes(Paths.get(webServer.getWebsiteFilesPath(), "maintenance/maintenance.html")));
                     } else {
                         sendResponse(out, "200 OK", contentType, Files.readAllBytes(filePath));
                     }
                 }else {
                     if (contentType.contains("html")) {
-                        sendResponse(out, "503 Service Unavailable", contentType, Files.readAllBytes(Paths.get(webServer.getIndexPath(), "/serverdown.html")));
+                        sendResponse(out, "503 Service Unavailable", contentType, Files.readAllBytes(Paths.get(webServer.getWebsiteFilesPath(), "serverdown/serverdown.html")));
                     } else {
                         sendResponse(out, "200 OK", contentType, Files.readAllBytes(filePath));
                     }
