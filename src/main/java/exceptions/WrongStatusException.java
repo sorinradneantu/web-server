@@ -1,3 +1,3 @@
 package exceptions;
 
-public class WrongStatusException extends Exception{ }
+public class WrongStatusException extends WrongServerException{ }

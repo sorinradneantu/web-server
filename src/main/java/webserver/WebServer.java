@@ -16,7 +16,7 @@ public class WebServer {
 
     }
 
-    public WebServer(int port, String websiteFilesPath, String serverStatus) throws WrongPortException,WrongStatusException,WrongWebsitePathException {
+    public WebServer(int port, String websiteFilesPath, String serverStatus) throws WrongServerException {
         validateWebServerInputs(port,websiteFilesPath,serverStatus);
         this.port = port;
         this.websiteFilesPath = websiteFilesPath;
@@ -52,7 +52,7 @@ public class WebServer {
         this.request = request;
     }
 
-    public void validateWebServerInputs(int port, String websiteFilesPath, String serverStatus) throws WrongPortException,WrongStatusException,WrongWebsitePathException {
+    public void validateWebServerInputs(int port, String websiteFilesPath, String serverStatus) throws WrongServerException {
 
         if(port != 8080){
             throw new WrongPortException();

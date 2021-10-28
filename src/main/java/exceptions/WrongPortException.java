@@ -1,3 +1,3 @@
 package exceptions;
 
-public class WrongPortException extends Exception { }
+public class WrongPortException extends WrongServerException { }
