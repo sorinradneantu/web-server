@@ -1,6 +1,9 @@
 package webserver;
 
+import exceptions.WrongPortException;
 import exceptions.WrongServerException;
+import exceptions.WrongStatusException;
+import exceptions.WrongWebsitePathException;
 
 public class WebServer {
 
@@ -13,7 +16,7 @@ public class WebServer {
 
     }
 
-    public WebServer(int port, String websiteFilesPath, String serverStatus) throws WrongServerException {
+    public WebServer(int port, String websiteFilesPath, String serverStatus) throws WrongPortException,WrongStatusException,WrongWebsitePathException {
         validateWebServerInputs(port,websiteFilesPath,serverStatus);
         this.port = port;
         this.websiteFilesPath = websiteFilesPath;
@@ -49,18 +52,18 @@ public class WebServer {
         this.request = request;
     }
 
-    public void validateWebServerInputs(int port, String websiteFilesPath, String serverStatus) throws WrongServerException {
+    public void validateWebServerInputs(int port, String websiteFilesPath, String serverStatus) throws WrongPortException,WrongStatusException,WrongWebsitePathException {
 
         if(port != 8080){
-            throw new WrongServerException();
+            throw new WrongPortException();
         }
 
         if(!serverStatus.equals("Stopped")){
-            throw new WrongServerException();
+            throw new WrongStatusException();
         }
 
         if(!websiteFilesPath.equals("src/main/java/website")){
-            throw new WrongServerException();
+            throw new WrongWebsitePathException();
         }
 
     }
