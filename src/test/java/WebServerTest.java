@@ -1,4 +1,7 @@
+import exceptions.WrongPortException;
 import exceptions.WrongServerException;
+import exceptions.WrongStatusException;
+import exceptions.WrongWebsitePathException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import webserver.WebServer;

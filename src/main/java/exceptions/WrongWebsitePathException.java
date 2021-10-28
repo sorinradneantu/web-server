@@ -1,3 +1,3 @@
 package exceptions;
 
-public class WrongWebsitePathException extends Exception{ }
+public class WrongWebsitePathException extends WrongServerException{ }
