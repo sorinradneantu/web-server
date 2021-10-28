@@ -32,7 +32,7 @@ public class WebServerTest {
         webServer = new WebServer(8080,"src/main/java/website","Stopped");
     }
 
-    @Test
+    @Test(expected=WrongPortException.class)
     public void testPortNotOk() throws WrongServerException {
         webServer = new WebServer(8081,"src/main/java/website","Stopped");
     }
@@ -42,7 +42,7 @@ public class WebServerTest {
         webServer = new WebServer(8080,"src/main/java/website","Stopped");
     }
 
-    @Test
+    @Test(expected=WrongWebsitePathException.class)
     public void testWebsiteFilesPathNotOk() throws WrongServerException {
         webServer = new WebServer(8080,"src/main/java/webserver","Stopped");
     }
@@ -52,7 +52,7 @@ public class WebServerTest {
         webServer = new WebServer(8080,"src/main/java/website","Stopped");
     }
 
-    @Test
+    @Test(expected=WrongStatusException.class)
     public void testServerStatusNotOk() throws WrongServerException {
         webServer = new WebServer(8080,"src/main/java/website","Running");
     }
