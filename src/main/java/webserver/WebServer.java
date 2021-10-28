@@ -7,7 +7,11 @@ public class WebServer {
     private int port; // port
     private String websiteFilesPath; // the path to website files
     private String serverStatus; // the server's status
-    private String request; // handled request
+    private String request; // the handled request
+
+    public WebServer(){
+
+    }
 
     public WebServer(int port, String websiteFilesPath, String serverStatus) throws WrongServerException {
         validateWebServerInputs(port,websiteFilesPath,serverStatus);
@@ -33,6 +37,10 @@ public class WebServer {
         this.serverStatus = serverStatus;
     }
 
+    public String getWebsiteFilesPath() { return websiteFilesPath; }
+
+    public void setWebsiteFilesPath(String websiteFilesPath) { this.websiteFilesPath = websiteFilesPath; }
+
     public String getRequest() {
         return request;
     }
@@ -41,11 +49,7 @@ public class WebServer {
         this.request = request;
     }
 
-    public String getWebsiteFilesPath() { return websiteFilesPath; }
-
-    public void setWebsiteFilesPath(String websiteFilesPath) { this.websiteFilesPath = websiteFilesPath; }
-
-    public void validateWebServerInputs(int port,String websiteFilesPath,String serverStatus) throws WrongServerException {
+    public void validateWebServerInputs(int port, String websiteFilesPath, String serverStatus) throws WrongServerException {
 
         if(port != 8080){
             throw new WrongServerException();
