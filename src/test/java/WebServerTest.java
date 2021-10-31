@@ -105,6 +105,13 @@ public class WebServerTest {
         assertEquals("test website path",webServer.getWebsiteFilesPath());
     }
 
+    @Test
+    public void testGetAndSetRequestOk(){
+        webServer = new WebServer();
+        webServer.setRequest("test request");
+        assertEquals("test request",webServer.getRequest());
+    }
+
     // ************************ /Not mandatory tests **************************
 
 
