@@ -66,9 +66,8 @@ public class ServerController {
 
             }else{
                 rawPath = inputs.get(0).split(" ")[1];
-
                 // Construct the path for file
-                if("/".equals(rawPath)){
+                if("/".equals(rawPath) || "/index.html".equals(rawPath)){
                     filePath = Paths.get(webServer.getWebsiteFilesPath(), "index/index.html");
                 }else if("/index.css".equals(rawPath)){
                     filePath = Paths.get(webServer.getWebsiteFilesPath(),"index/index.css");
@@ -78,6 +77,14 @@ public class ServerController {
                     filePath = Paths.get(rawPath);
                 }
 
+                System.out.println(rawPath);
+
+                if(!filePath.toString().contains("index") && !filePath.toString().contains("favicon")){
+                    String aux = webServer.getWebsiteFilesPath()+'/'+"htmlFiles";
+                    filePath = Paths.get(aux,rawPath);
+                }
+
+                System.out.println("file path : "+filePath);
                 // extract the content type
                 contentType = Files.probeContentType(filePath);
 
@@ -98,7 +105,7 @@ public class ServerController {
                     } else {
                         sendResponse(out, "200 OK", contentType, Files.readAllBytes(filePath));
                     }
-                }else {
+                }else  {
                     if (contentType.contains("html")) {
                         sendResponse(out, "503 Service Unavailable", contentType, Files.readAllBytes(Paths.get(webServer.getWebsiteFilesPath(), "serverdown/serverdown.html")));
                     } else {
