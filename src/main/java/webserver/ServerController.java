@@ -71,7 +71,7 @@ public class ServerController {
                     filePath = Paths.get(webServer.getWebsiteFilesPath(), "index/index.html");
                 }else if("/index.css".equals(rawPath)){
                     filePath = Paths.get(webServer.getWebsiteFilesPath(),"index/index.css");
-                }else if("favicon.ico".equals(rawPath)){
+                }else if("/favicon.ico".equals(rawPath)){
                     filePath = Paths.get(webServer.getWebsiteFilesPath(), "favicon.ico");
                 }else{
                     filePath = Paths.get(rawPath);
