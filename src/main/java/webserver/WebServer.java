@@ -5,12 +5,15 @@ import exceptions.WrongServerException;
 import exceptions.WrongStatusException;
 import exceptions.WrongWebsitePathException;
 
+import java.util.ArrayList;
+
 public class WebServer {
 
     private int port; // port
     private String websiteFilesPath; // the path to website files
     private String serverStatus; // the server's status
     private String request; // the handled request
+    public ArrayList<ArrayList<String>> pagesList;
 
     public WebServer(){
 
@@ -22,6 +25,7 @@ public class WebServer {
         this.websiteFilesPath = websiteFilesPath;
         this.serverStatus = serverStatus;
         this.request = "";
+        pagesList = new ArrayList<ArrayList<String>>();
     }
 
     public int getPort() {
@@ -66,5 +70,12 @@ public class WebServer {
             throw new WrongWebsitePathException();
         }
 
+    }
+
+    public void addPageLevel(ArrayList<String> newLevel){
+        pagesList.add(newLevel);
+    }
+    public void addPageAtLevel(String newPage,int level){
+        pagesList.get(level).add(newPage);
     }
 }
