@@ -6,6 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import webserver.WebServer;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -55,6 +57,26 @@ public class WebServerTest {
     @Test(expected=WrongStatusException.class)
     public void testServerStatusNotOk() throws WrongServerException {
         webServer = new WebServer(8080,"src/main/java/website","Running");
+    }
+
+    @Test
+    public void testAddLevelOK() throws WrongServerException {
+        webServer = new WebServer(8080,"src/main/java/website","Stopped");
+        assertEquals(0,webServer.pagesList.size());
+
+        ArrayList<String> testLevel = new ArrayList<String>();
+        webServer.addPageLevel(testLevel);
+        assertEquals(1,webServer.pagesList.size());
+    }
+
+    @Test
+    public void testAddPageAtLevelOK() throws WrongServerException {
+        webServer = new WebServer(8080,"src/main/java/website","Stopped");
+        ArrayList<String> testLevel = new ArrayList<String>();
+        webServer.addPageLevel(testLevel);
+        assertEquals(0,webServer.pagesList.get(0).size());
+        webServer.addPageAtLevel("testPage",0);
+        assertEquals(1,webServer.pagesList.get(0).size());
     }
 
     // ************************* Not mandatory tests **************************
