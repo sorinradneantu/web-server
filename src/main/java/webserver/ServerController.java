@@ -77,14 +77,22 @@ public class ServerController {
                     filePath = Paths.get(rawPath);
                 }
 
-                System.out.println(rawPath);
+                System.out.println("raw path : " + rawPath); //debug
 
                 if(!filePath.toString().contains("index") && !filePath.toString().contains("favicon")){
-                    String aux = webServer.getWebsiteFilesPath()+'/'+"htmlFiles";
-                    filePath = Paths.get(aux,rawPath);
+                    if(webServer.pagesList.get(0).contains(rawPath.substring(1))) {
+                        String aux = webServer.getWebsiteFilesPath() + '/' + "htmlFiles";
+                        filePath = Paths.get(aux, rawPath);
+                    }else if(webServer.pagesList.get(1).contains(rawPath.substring(1))) {
+                        String aux = webServer.getWebsiteFilesPath() + '/' + "htmlFiles" + "/htmlFilesLevel2";
+                        filePath = Paths.get(aux, rawPath);
+                    }else if(webServer.pagesList.get(2).contains(rawPath.substring(1))) {
+                        String aux = webServer.getWebsiteFilesPath() + '/' + "htmlFiles" + "/htmlFilesLevel2" + "/htmlFilesLevel3";
+                        filePath = Paths.get(aux, rawPath);
+                    }
                 }
 
-                System.out.println("file path : "+filePath);
+                System.out.println("file path : "+filePath); //debug
                 // extract the content type
                 contentType = Files.probeContentType(filePath);
 
