@@ -27,30 +27,94 @@ public class ServerController {
             System.out.println("Server created successfully on port : " + socketPort);
             return newSocket;
         } catch (IllegalArgumentException e) {
-            System.out.println("Port is out of range.");
+            System.out.println("The port must be between 0 and 65535.");
             throw e;
         } catch (BindException b) {
-            System.out.println("Port already occupied.");
+            System.out.println("Port not available.");
             throw b;
         } catch (Exception c) {
-            System.out.println("Failed creating server socket on port: " + socketPort);
+            System.out.println("creating server socket failed on port: " + socketPort);
             System.out.println("Exception: " + c);
             return null;
         }
 
     }
 
+    public void closeServerSocket(ServerSocket serverSocket) throws NullPointerException {
+        try {
+
+            serverSocket.close();
+            System.out.println("Closed server socket successfully on port: " + serverSocket.getLocalPort());
+
+        } catch (NullPointerException e) {
+
+            System.out.println("This socket is null.");
+            throw e;
+
+        } catch (Exception b) {
+
+            System.out.println("closing server socket failed on port: " + serverSocket.getLocalPort());
+            System.out.println("Exception: " + b);
+
+        }
+    }
+
+    public Socket newClientSocket(ServerSocket serverSocket) throws Exception {
+
+        try {
+            Socket newClientSocket = this.acceptSocket(serverSocket);
+            System.out.println("client created successfully");
+            return newClientSocket;
+        } catch (Exception e) {
+            System.out.println("creating client failed");
+            System.out.println("Exception : " + e);
+            throw e;
+        }
+    }
+
+    public void closeClientSocket(Socket clientSocket) throws NullPointerException {
+        try {
+
+            clientSocket.close();
+            System.out.println("Closed client socket successfully!");
+
+        } catch (NullPointerException e) {
+
+            System.out.println("This client is null.");
+            throw e;
+
+        } catch (Exception b) {
+
+            System.out.println("closing client socket failed!");
+            System.out.println("Exception: " + b);
+
+        }
+    }
+
+    public Socket acceptSocket(ServerSocket serverSocket) throws Exception {
+        try {
+            return serverSocket.accept();
+        } catch (Exception e) {
+            System.out.println("The socket cannot be accepted.");
+            System.out.println("Exception: " + e);
+            throw e;
+        }
+    }
+
     public void requestHandler(){
         try(ServerSocket serverSocket = this.newServerSocket(webServer.getPort())){
 
-            Socket clientSocket = serverSocket.accept();
+            Socket clientSocket = this.newClientSocket(serverSocket);
             clientHandler(clientSocket);
-            clientSocket.close();
+            this.closeClientSocket(clientSocket);
+            this.closeServerSocket(serverSocket);
 
         }catch(IOException e){
 
             System.err.println("Could not listen on port:" + webServer.getPort());
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -98,7 +162,7 @@ public class ServerController {
                     filePath = Paths.get(rawPath);
                 }
 
-                System.out.println("raw path : " + rawPath); //debug
+                System.out.println("DEBUG : raw path : " + rawPath); //debug
 
                 if(!filePath.toString().contains("index") && !filePath.toString().contains("favicon")){
                     if(webServer.pagesList.get(0).contains(rawPath.substring(1))) {
@@ -113,7 +177,8 @@ public class ServerController {
                     }
                 }
 
-                System.out.println("file path : "+filePath); //debug
+                System.out.println("DEBUG : file path : "+filePath); //debug
+
                 // extract the content type
                 contentType = Files.probeContentType(filePath);
 
