@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
@@ -19,8 +20,28 @@ public class ServerController {
         this.webServer = webServer;
     }
 
+    public ServerSocket newServerSocket(int socketPort) throws BindException {
+
+        try {
+            ServerSocket newSocket = new ServerSocket(socketPort);
+            System.out.println("Server created successfully on port : " + socketPort);
+            return newSocket;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Port is out of range.");
+            throw e;
+        } catch (BindException b) {
+            System.out.println("Port already occupied.");
+            throw b;
+        } catch (Exception c) {
+            System.out.println("Failed creating server socket on port: " + socketPort);
+            System.out.println("Exception: " + c);
+            return null;
+        }
+
+    }
+
     public void requestHandler(){
-        try(ServerSocket serverSocket = new ServerSocket(webServer.getPort())){
+        try(ServerSocket serverSocket = this.newServerSocket(webServer.getPort())){
 
             Socket clientSocket = serverSocket.accept();
             clientHandler(clientSocket);
