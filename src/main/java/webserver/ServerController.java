@@ -40,7 +40,7 @@ public class ServerController {
 
     }
 
-    public void closeServerSocket(ServerSocket serverSocket) throws NullPointerException {
+    public static void closeServerSocket(ServerSocket serverSocket) throws NullPointerException {
         try {
 
             serverSocket.close();
@@ -59,20 +59,20 @@ public class ServerController {
         }
     }
 
-    public Socket newClientSocket(ServerSocket serverSocket) throws Exception {
+    public static Socket newClientSocket(ServerSocket serverSocket) throws Exception {
 
         try {
-            Socket newClientSocket = this.acceptSocket(serverSocket);
+            Socket newClientSocket = acceptSocket(serverSocket);
             System.out.println("client created successfully");
             return newClientSocket;
         } catch (Exception e) {
-            System.out.println("creating client failed");
+            System.out.println("creating new client failed");
             System.out.println("Exception : " + e);
             throw e;
         }
     }
 
-    public void closeClientSocket(Socket clientSocket) throws NullPointerException {
+    public static void closeClientSocket(Socket clientSocket) throws NullPointerException {
         try {
 
             clientSocket.close();
@@ -91,7 +91,7 @@ public class ServerController {
         }
     }
 
-    public Socket acceptSocket(ServerSocket serverSocket) throws Exception {
+    public static Socket acceptSocket(ServerSocket serverSocket) throws Exception {
         try {
             return serverSocket.accept();
         } catch (Exception e) {
@@ -174,6 +174,8 @@ public class ServerController {
                     }else if(webServer.pagesList.get(2).contains(rawPath.substring(1))) {
                         String aux = webServer.getWebsiteFilesPath() + '/' + "htmlFiles" + "/htmlFilesLevel2" + "/htmlFilesLevel3";
                         filePath = Paths.get(aux, rawPath);
+                    }else{
+                        filePath = Paths.get(rawPath);
                     }
                 }
 
