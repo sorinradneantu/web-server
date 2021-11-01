@@ -20,7 +20,7 @@ public class ServerController {
         this.webServer = webServer;
     }
 
-    public ServerSocket newServerSocket(int socketPort) throws BindException {
+    public static ServerSocket newServerSocket(int socketPort) throws BindException {
 
         try {
             ServerSocket newSocket = new ServerSocket(socketPort);
