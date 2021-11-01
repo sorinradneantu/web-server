@@ -25,7 +25,8 @@ public class ServerMain {
         webServer.addPageAtLevel("page3.html",0); // 0 means level1
         webServer.addPageAtLevel("page4.html",1); // 1 means level2
         webServer.addPageAtLevel("page5.html",2); // 2 means level3
-
+        webServer.addPageAtLevel("pageWithStyle.html",0); // 0 means level1
+        webServer.addPageAtLevel("pageWithStyle.css",0); // 0 means level1
         // Server Controller
         ServerController serverController = new ServerController(webServer);
 
