@@ -6,16 +6,22 @@ import webserver.WebServer;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ServerControllerTest {
+
+    private int port8080 = 8080;
+    private String websiteFilePath = "src/main/java/website";
+    private ArrayList<String> status = new ArrayList<String>(Arrays.asList("Stopped","Running","Maintenance"));
 
 
     @Test
     public void clientHandlerOk() throws WrongServerException, IOException {
-        WebServer webServer = new WebServer(8080,"src/main/java/website","Stopped");
+        WebServer webServer = new WebServer(port8080,websiteFilePath,status.get(0));
         ServerController serverController = new ServerController(webServer);
 
-        ServerSocket serverSocket = new ServerSocket(8080);
+        ServerSocket serverSocket = new ServerSocket(port8080);
 
         Socket clientSocket = serverSocket.accept();
 
@@ -25,7 +31,7 @@ public class ServerControllerTest {
 
     @Test
     public void clientHandlerNotOk() throws WrongServerException {
-        WebServer webServer = new WebServer(8080,"src/main/java/website","Stopped");
+        WebServer webServer = new WebServer(port8080,websiteFilePath,status.get(0));
         ServerController serverController = new ServerController(webServer);
 
         serverController.clientHandler(null);
@@ -35,7 +41,7 @@ public class ServerControllerTest {
     @Test
     public void requestHandlerServerStoppedTest() throws WrongServerException {
 
-        WebServer firstWebServer = new WebServer(8080,"src/main/java/website","Stopped");
+        WebServer firstWebServer = new WebServer(port8080,websiteFilePath,status.get(0));
 
         ServerController firstServerController = new ServerController(firstWebServer);
 
@@ -47,8 +53,8 @@ public class ServerControllerTest {
     @Test
     public void requestHandlerServerRunningTest() throws WrongServerException {
 
-        WebServer webserver = new WebServer(8080,"src/main/java/website","Stopped");
-        webserver.setServerStatus("Running");
+        WebServer webserver = new WebServer(port8080,websiteFilePath,status.get(0));
+        webserver.setServerStatus(status.get(1));
 
         ServerController firstServerController = new ServerController(webserver);
 
@@ -60,8 +66,8 @@ public class ServerControllerTest {
     @Test
     public void requestHandlerServerInMaintenanceTest() throws WrongServerException {
 
-        WebServer webserver = new WebServer(8080,"src/main/java/website","Stopped");
-        webserver.setServerStatus("Maintenance");
+        WebServer webserver = new WebServer(port8080,websiteFilePath,status.get(0));
+        webserver.setServerStatus(status.get(2));
 
         ServerController firstServerController = new ServerController(webserver);
 
