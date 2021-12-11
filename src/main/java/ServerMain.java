@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class ServerMain {
 
+    private static WebServer webServer;
+
     public static void main(String[] args) throws WrongServerException {
 
         int port = 8080; // port
@@ -13,7 +15,7 @@ public class ServerMain {
         String serverStatus = "Stopped"; // initial state -> stopped
 
         // Server
-        WebServer webServer = new WebServer(port,websiteFilesPath,serverStatus);
+        webServer = new WebServer(port,websiteFilesPath,serverStatus);
         ArrayList<String> level1 = new ArrayList<String>();
         ArrayList<String> level2 = new ArrayList<String>();
         ArrayList<String> level3 = new ArrayList<String>();
