@@ -28,7 +28,6 @@ public class ServerMain {
         webServer.addPageAtLevel("pageWithStyle.html",0); // 0 means level1
         webServer.addPageAtLevel("pageWithStyle.css",0); // 0 means level1
         webServer.addPageAtLevel("upt.jpg",0); // 0 means level1
-
         // Server Controller
         ServerController serverController = new ServerController(webServer);
 
