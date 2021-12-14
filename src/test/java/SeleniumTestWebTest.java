@@ -55,7 +55,7 @@ public class SeleniumTestWebTest {
   }
 
   @Test
-  public void seleniumTestweb() {
+  public void seleniumTestWeb() {
     //System.setProperty("webdriver.chrome.driver","D:\\Selenium\\chromedriver.exe");
     driver.get("http://localhost:8080/");
     driver.manage().window().setSize(new Dimension(1058, 805));
